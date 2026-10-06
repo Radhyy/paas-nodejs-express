@@ -42,9 +42,11 @@ app.get("/api/log-test", (req, res) => {
 
 // Challenge: Endpoint /api/time
 app.get("/api/time", (req, res) => {
+  const date = new Date();
   res.json({
-    time_iso: new Date().toISOString(),
-    time_unix: Date.now()
+    time_iso: date.toISOString(),
+    time_unix: date.getTime(),
+    time_wib: date.toLocaleString("id-ID", { timeZone: "Asia/Jakarta" }) + " WIB"
   });
 });
 
