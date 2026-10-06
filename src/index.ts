@@ -20,7 +20,8 @@ app.get("/api/status", (req, res) => {
     status: "ok",
     subject: "PaaS",
     week: 5,
-    platform: "Cloudflare Workers"
+    platform: "Cloudflare Workers",
+    timestamp: new Date().toISOString()
   });
 });
 
@@ -44,6 +45,7 @@ app.get("/api/log-test", (req, res) => {
 app.get("/api/time", (req, res) => {
   const date = new Date();
   res.json({
+    timestamp: date.toISOString(),
     time_iso: date.toISOString(),
     time_unix: date.getTime(),
     time_wib: date.toLocaleString("id-ID", { timeZone: "Asia/Jakarta" }) + " WIB"
