@@ -5,6 +5,12 @@ import { dashboardHTML } from "./dashboard";
 
 const app = express();
 
+// Challenge: Middleware Logger
+app.use((req, res, next) => {
+  console.log(`[LOG] ${req.method} request to ${req.url}`);
+  next();
+});
+
 app.get("/", (req, res) => {
   res.send(dashboardHTML);
 });
@@ -32,6 +38,20 @@ app.get("/api/log-test", (req, res) => {
   res.json({
     logged: true
   });
+});
+
+// Challenge: Endpoint /api/time
+app.get("/api/time", (req, res) => {
+  res.json({
+    time_iso: new Date().toISOString(),
+    time_unix: Date.now()
+  });
+});
+
+// Challenge: Route parameter /hello/:name
+app.get("/hello/:name", (req, res) => {
+  const userName = req.params.name;
+  res.send(`<h1>Hello, ${userName}! Welcome to Cloudflare Edge Serverless.</h1>`);
 });
 
 app.listen(3000);
